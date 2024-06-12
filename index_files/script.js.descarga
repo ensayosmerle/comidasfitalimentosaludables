@@ -1,0 +1,86 @@
+var size;
+var extra;
+function detectarTamano() {
+  extra = $("#header").outerHeight();
+  size = window.outerWidth;
+  if (size == 0) {
+      size = screen.width;
+  }
+  return size;
+}
+
+$(function() {
+  $('.nav-item a').click(function(e) {
+    e.preventDefault();
+    irA(this.hash);
+  });
+});
+
+function irA(target) {
+  if (target.length) {
+    $('html,body').animate({
+      scrollTop: $(target).offset().top - extra + 1
+    }, 1000);
+  }
+}
+
+$(document).ready(function(){
+  detectarTamano();
+  $('#experiencia .experiencia p').each(function(){ 
+    var $p = $(this); 
+    $p.html($p.html().replace(/^(\w+)/, '<strong>$1</strong>')); 
+  });
+  if($('.proyecto .slick').length > 0) {
+    $('.proyecto .slick').slick({
+      autoplay: true,
+      dots: true,
+      infinite: true,
+      cssEase: 'linear',
+      arrows: true,
+      nextArrow: '<img class="slick-next slick-arrow" src="/images/arrow.png" />',
+      prevArrow: '<img class="slick-prev slick-arrow" src="/images/arrow.png" />',
+      fade: true,
+      pauseOnHover: false,
+      speed: 700,
+      autoplaySpeed: 7000
+    });
+    $('.proyecto .slick').slickAnimation();
+  }
+  if($('.index .slick').length > 0) {
+    $('.index .slick').slick({
+      autoplay: true,
+      dots: false,
+      infinite: true,
+      cssEase: 'linear',
+      arrows: true,
+      nextArrow: '<img class="slick-next slick-arrow" src="/images/arrow.png" />',
+      prevArrow: '<img class="slick-prev slick-arrow" src="/images/arrow.png" />',
+      fade: true,
+      pauseOnHover: false,
+      speed: 700,
+      autoplaySpeed: 7000,
+      adaptiveHeight: true
+    });
+    $('.index .slick').slickAnimation();
+  }
+});
+
+$(function() {
+  $('.desplegable .collapse p').on('click', function(){ 
+    // $(this).parent().prev().trigger( "click" );
+    $('.desplegable button').not('.collapsed').trigger('click');
+  });
+});
+$(document).ready(function() {
+  $('#subsidio19 .collapse').on('shown.bs.collapse', function () {
+    $(this).prev().addClass('active-acc');
+  });
+  $('#subsidio19 .collapse').on('hidden.bs.collapse', function () {
+    $(this).prev().removeClass('active-acc');
+  });
+});
+function teAsesoramos(){
+  $('html,body').animate({
+    scrollTop: $('#info').offset().top - 100
+  }, 1000);
+}
